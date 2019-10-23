@@ -128,21 +128,23 @@ namespace PDFConverter
 
             string filename = filePaths[0];
 
-            PdfDocument doc = PdfDocument.Load(filename);
-            List<System.Drawing.Image> images = new List<System.Drawing.Image>();
-
-            //Get an image for each page
-            for (int i = 0; i < doc.PageCount; i++)
+            using (PdfDocument doc = PdfDocument.Load(filename))
             {
-                System.Drawing.Image img = doc.Render(i, (int)doc.PageSizes[i].Width, (int)doc.PageSizes[i].Height, 150, 150, PdfRenderFlags.CorrectFromDpi);
-                images.Add(img);
-            }
+                List<System.Drawing.Image> images = new List<System.Drawing.Image>();
 
-            //Keep hold of the images related to each pdf
-            if (images != null && images.Count > 0)
-            {
-                string name = Path.GetFileNameWithoutExtension(filename);
-                pdfToSave = new KeyValuePair<string, List<System.Drawing.Image>>(name, images);
+                //Get an image for each page
+                for (int i = 0; i < doc.PageCount; i++)
+                {
+                    System.Drawing.Image img = doc.Render(i, (int)doc.PageSizes[i].Width, (int)doc.PageSizes[i].Height, 150, 150, PdfRenderFlags.CorrectFromDpi);
+                    images.Add(img);
+                }
+
+                //Keep hold of the images related to each pdf
+                if (images != null && images.Count > 0)
+                {
+                    string name = Path.GetFileNameWithoutExtension(filename);
+                    pdfToSave = new KeyValuePair<string, List<System.Drawing.Image>>(name, images);
+                }
             }
 
             return pdfToSave;
