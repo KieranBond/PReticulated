@@ -63,22 +63,7 @@ namespace PDFConverter
                 saveLocation = PromptSaveLocation();
 
             SaveAsPDFs(saveLocation);
-            //Dictionary<string, List<System.Drawing.Image>> pdfsToSave = GetPDFsToSave();
 
-            //if(saveLocation != null && pdfsToSave != null && pdfsToSave.Count > 0)
-            //{
-            //    if (SaveAsPDFs(saveLocation, pdfsToSave))
-            //    {
-            //        //Wipe our lists
-            //        selectedFiles.Items.Clear();
-            //        filePaths.Clear();
-            //    }
-            //    else
-            //    {
-
-            //        Console.WriteLine("Error saving");
-            //    }
-            //}
             selectedFiles.Items.Clear();
             filePaths.Clear();
 
@@ -173,52 +158,43 @@ namespace PDFConverter
                 {
                     //Skip this one
                     filePaths.RemoveAt(0);
+
+                    //Make sure we've released everything
+                    if (pdf.Value != null && pdf.Value.Count > 0)
+                    {
+                        for (int x = pdf.Value.Count-1; x >= 0; x--)
+                        {
+                            pdf.Value[x].Dispose();
+                            pdf.Value.RemoveAt(x);
+                        }
+                    }
+
                     continue;
                 }
 
                 //For each page of the pdf, create a file
-                for (int i = 0; i < pdf.Value.Count; i++)
+                for (int i = pdf.Value.Count-1; i >= 0; i--)
                 {
                     string filename = pdf.Key + i.ToString() + ".png";
                     string path = Path.Combine(saveLocation, filename);
                     try
                     {
                         pdf.Value[i].Save(path, ImageFormat.Png);
-                        pdf.Value[i].Dispose();
                     }
                     catch (Exception e)
                     {
                         //Todo: Add handling
+                    }
+                    finally
+                    {
                         pdf.Value[i].Dispose();
+                        pdf.Value.RemoveAt(i);
                     }
                 }
 
                 filePaths.RemoveAt(0);
             }
         }
-
-        //private bool SaveAsPDFs(string saveLocation, Dictionary<string, List<System.Drawing.Image>> pdfsToSave)
-        //{
-        //    foreach (KeyValuePair<string, List<System.Drawing.Image>> pdf in pdfsToSave)
-        //    {
-        //        for (int i = 0; i < pdf.Value.Count; i++)
-        //        {
-        //            string filename = pdf.Key + i.ToString() + ".png";
-        //            string path = Path.Combine(saveLocation, filename);
-        //            try
-        //            {
-        //                pdf.Value[i].Save(path, ImageFormat.Png);
-        //                pdf.Value[i].Dispose();
-        //            }
-        //            catch (Exception e)
-        //            {
-        //                return false;
-        //            }
-        //        }
-        //    }
-
-        //    return true;
-        //}
 
         private string PromptSaveLocation()
         {
