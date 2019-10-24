@@ -128,24 +128,24 @@ namespace PDFConverter
 
             string filename = filePaths[0];
 
-            using (PdfDocument doc = PdfDocument.Load(filename))
+            using PdfDocument doc = PdfDocument.Load(filename);
+            
+            List<System.Drawing.Image> images = new List<System.Drawing.Image>();
+
+            //Get an image for each page
+            for (int i = 0; i < doc.PageCount; i++)
             {
-                List<System.Drawing.Image> images = new List<System.Drawing.Image>();
-
-                //Get an image for each page
-                for (int i = 0; i < doc.PageCount; i++)
-                {
-                    System.Drawing.Image img = doc.Render(i, (int)doc.PageSizes[i].Width, (int)doc.PageSizes[i].Height, 150, 150, PdfRenderFlags.CorrectFromDpi);
-                    images.Add(img);
-                }
-
-                //Keep hold of the images related to each pdf
-                if (images != null && images.Count > 0)
-                {
-                    string name = Path.GetFileNameWithoutExtension(filename);
-                    pdfToSave = new KeyValuePair<string, List<System.Drawing.Image>>(name, images);
-                }
+                System.Drawing.Image img = doc.Render(i, (int)doc.PageSizes[i].Width, (int)doc.PageSizes[i].Height, 150, 150, PdfRenderFlags.CorrectFromDpi);
+                images.Add(img);
             }
+
+            //Keep hold of the images related to each pdf
+            if (images != null && images.Count > 0)
+            {
+                string name = Path.GetFileNameWithoutExtension(filename);
+                pdfToSave = new KeyValuePair<string, List<System.Drawing.Image>>(name, images);
+            }
+            
 
             return pdfToSave;
         }
@@ -155,6 +155,8 @@ namespace PDFConverter
             while(filePaths.Count > 0)
             {
                 //Get the next PDF to save
+
+                //We'll manually dispose each image, as a using in this case will be quite messy
                 KeyValuePair<string, List<System.Drawing.Image>> pdf = GetPDFToSave();
                 if (string.IsNullOrEmpty(pdf.Key))
                 {
@@ -216,8 +218,6 @@ namespace PDFConverter
             {
                 location = fileDialog.FileName;
             }
-
-            Console.WriteLine(location);
 
             return location;
         }
