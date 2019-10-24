@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.29411.108
+VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFConverter", "PDFConverter.csproj", "{C1206278-8BCF-4EC7-A372-948CC60ED696}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFConverter", "PDFConverter.csproj", "{95452CE5-5681-4F1E-A672-A6448422287B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C1206278-8BCF-4EC7-A372-948CC60ED696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1206278-8BCF-4EC7-A372-948CC60ED696}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1206278-8BCF-4EC7-A372-948CC60ED696}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1206278-8BCF-4EC7-A372-948CC60ED696}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95452CE5-5681-4F1E-A672-A6448422287B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95452CE5-5681-4F1E-A672-A6448422287B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95452CE5-5681-4F1E-A672-A6448422287B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95452CE5-5681-4F1E-A672-A6448422287B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7281B512-E78B-4FDB-AB28-C12934FBA8C5}
+		SolutionGuid = {A3FE8C34-7EF3-4651-943A-34FA469E852B}
 	EndGlobalSection
 EndGlobal
