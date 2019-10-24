@@ -65,11 +65,11 @@ namespace PDFConverter
             if(filePaths != null && filePaths.Count > 0)
                 saveLocation = PromptSaveLocation();
 
-            foreach(string file in filePaths)
+            Parallel.ForEach(filePaths, file =>
             {
                 PDFConvertService converter = new PDFConvertService();
                 converter.SavePDFAsPNG(file, saveLocation);
-            }
+            });
 
             selectedFiles.Items.Clear();
             filePaths.Clear();
