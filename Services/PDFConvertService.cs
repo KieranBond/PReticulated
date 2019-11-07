@@ -51,7 +51,13 @@ namespace PDFConverter.Services
                 return false;
             }
 
-            //For each page of the pdf, create a file
+            //For each page of the pdf, create a file in its folder
+            string PNGFolder = saveLocation + "\\" + originalFileName;
+            if (!Directory.Exists(PNGFolder))
+                Directory.CreateDirectory(PNGFolder);
+
+            saveLocation += "\\" + originalFileName;
+
             for (int i = pdfImages.Count - 1; i >= 0; i--)
             {
                 string filename = originalFileName + i.ToString() + ".png";
