@@ -120,9 +120,9 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\Build\x86\pdfium.dll">
+    <Resource Include="packages\PdfiumViewer.Native.x86.v8-xfa.2018.4.8.256\Build\x86\pdfium.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
